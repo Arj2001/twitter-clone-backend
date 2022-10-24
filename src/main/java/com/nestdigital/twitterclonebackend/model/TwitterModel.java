@@ -1,10 +1,8 @@
 package com.nestdigital.twitterclonebackend.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -14,10 +12,18 @@ public class TwitterModel {
     @GeneratedValue
     private int id;
 
+    @OneToMany(mappedBy = "user")
+    private List<TweetModel> tweets;
+
     private String name,dob,place,email,password,phone;
 
-    public TwitterModel(int id, String name, String dob, String place, String email, String password, String phone) {
+
+    public TwitterModel() {
+    }
+
+    public TwitterModel(int id, List<TweetModel> tweets, String name, String dob, String place, String email, String password, String phone) {
         this.id = id;
+        this.tweets = tweets;
         this.name = name;
         this.dob = dob;
         this.place = place;
@@ -26,15 +32,20 @@ public class TwitterModel {
         this.phone = phone;
     }
 
-    public TwitterModel() {
-    }
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public List<TweetModel> getTweets() {
+        return tweets;
+    }
+
+    public void setTweets(List<TweetModel> tweets) {
+        this.tweets = tweets;
     }
 
     public String getName() {
