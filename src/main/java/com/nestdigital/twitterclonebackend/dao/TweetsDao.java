@@ -6,16 +6,17 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Map;
 
 public interface TweetsDao extends CrudRepository<TweetsModel,Integer> {
 
 
-    @Override
-    @Query(value = "select * from tweets ORDER BY datetime DESC",nativeQuery = true)
-    List<TweetsModel> findAll();
 
-    @Query(value = "select * from tweets where user_id = :id ORDER BY datetime DESC",nativeQuery = true)
-    List<TweetsModel> findByUserId(Integer id);
+    @Query(value = "select t.tweets, t.datetime, u.name from tweets t join users u on u.id = t.user_id ORDER BY datetime DESC",nativeQuery = true)
+    List<Map<String,String >> findAllTw();
+
+    @Query(value = "select t.tweets, t.datetime, u.name from tweets t join users u on u.id = t.user_id where t.user_id = :id ORDER BY datetime DESC",nativeQuery = true)
+    List<Map<String,String >> findByUserId(Integer id);
 
     @Modifying
     @Query(value = "UPDATE `tweets` SET `tweets`=:tweet WHERE `id` = :id",nativeQuery = true)
