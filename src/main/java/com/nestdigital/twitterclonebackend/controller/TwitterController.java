@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class TwitterController {
@@ -41,14 +42,14 @@ public class TwitterController {
 
     @CrossOrigin(origins = "*")
     @GetMapping(path = "/viewTweets")
-    public List<TweetsModel> viewTweets(){
-        return (List<TweetsModel>) tweetsDao.findAll();
+    public List<Map<String,String>> viewTweets(){
+        return (List<Map<String,String>>) tweetsDao.findAllTw();
     }
 
     @CrossOrigin(origins = "*")
     @PostMapping(path = "/viewUserTweet",consumes = "application/json",produces = "application/json")
-    public List<TweetsModel> findByUserId(@RequestBody TweetsModel tweets){
-        return (List<TweetsModel>) tweetsDao.findByUserId(tweets.getUser_id());
+    public List<Map<String,String >> findByUserId(@RequestBody TweetsModel tweets){
+        return (List<Map<String,String >>) tweetsDao.findByUserId(tweets.getUser_id());
     }
 
     @CrossOrigin(origins = "*")

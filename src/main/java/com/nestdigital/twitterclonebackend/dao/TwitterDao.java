@@ -10,4 +10,6 @@ public interface TwitterDao extends CrudRepository<TwitterModel,Integer> {
 
     @Query(value = "SELECT * FROM `users` WHERE email = :email AND password =:password",nativeQuery = true)
     List<TwitterModel> authenticate(String email,String password);
+
+
 }

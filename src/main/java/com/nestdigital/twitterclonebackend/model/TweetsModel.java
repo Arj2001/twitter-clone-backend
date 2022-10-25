@@ -14,12 +14,11 @@ public class TweetsModel {
     private int id;
 
     private int user_id;
-    private String name,datetime,tweets;
+    private String datetime,tweets;
 
-    public TweetsModel(int id, int user_id, String name, String datetime, String tweets) {
+    public TweetsModel(int id, int user_id, String datetime, String tweets) {
         this.id = id;
         this.user_id = user_id;
-        this.name = name;
         this.datetime = datetime;
         this.tweets = tweets;
     }
@@ -41,14 +40,6 @@ public class TweetsModel {
 
     public void setUser_id(int user_id) {
         this.user_id = user_id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getDatetime() {
