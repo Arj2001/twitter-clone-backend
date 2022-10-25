@@ -7,6 +7,7 @@ import com.nestdigital.twitterclonebackend.model.TwitterModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
@@ -54,6 +55,13 @@ public class TwitterController {
     @PostMapping(path = "/deleteTweet",consumes = "application/json",produces = "application/json")
     public void deleteById(@RequestBody TweetsModel tweets){
         tweetsDao.deleteById(tweets.getId());
+    }
+
+    @Transactional
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/editTweet",consumes = "application/json",produces = "application/json")
+    public void editById(@RequestBody TweetsModel tweets){
+        tweetsDao.updateById(tweets.getId());
     }
 
 }

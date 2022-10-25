@@ -1,6 +1,7 @@
 package com.nestdigital.twitterclonebackend.dao;
 
 import com.nestdigital.twitterclonebackend.model.TweetsModel;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -15,5 +16,9 @@ public interface TweetsDao extends CrudRepository<TweetsModel,Integer> {
 
     @Query(value = "select * from tweets where user_id = :id ORDER BY datetime DESC",nativeQuery = true)
     List<TweetsModel> findByUserId(Integer id);
+
+    @Modifying
+    @Query(value = "UPDATE `tweets` SET `tweets`=:tweet WHERE `id` = :id",nativeQuery = true)
+    void updateById(Integer id);
 
 }
